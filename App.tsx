@@ -50,7 +50,7 @@ function App(){
                 <Camera className="flex-1" type={cameraType} ref={(camera) => {
                     cameraRef.current = camera;
                 }}>
-                    <View className="flex-1 flex-row bg-transparent m-64">
+                    <View className="flex-1 flex-row bg-transparent mt-20">
                         <TouchableOpacity className="flex-1 flex-end items-center" onPress={toggleCameraType}>
                             <Text className="text-2xl font-bold text-white">Flip Camera</Text>
                         </TouchableOpacity>
