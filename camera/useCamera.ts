@@ -17,14 +17,20 @@ export const useCamera = () => {
     };
 
     const capturePhoto = async () => {
-        let options = {
-            quality: 1,
-            base64: true,
-            exif: false
-        };
-        if(!cameraRef.current) return;
-        let newPhoto = await cameraRef.current.takePictureAsync(options);
-        setPhoto(newPhoto);
+        try{
+            let options = {
+                quality: 1,
+                base64: true,
+                exif: false
+            };
+            if(!cameraRef.current) return;
+            let newPhoto = await cameraRef.current.takePictureAsync(options);
+            setPhoto(newPhoto);
+        }
+        catch(e: any){
+            console.log(e);
+        }
+        
     }
 
     let sharePic = () => {

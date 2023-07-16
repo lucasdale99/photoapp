@@ -1,19 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {Camera} from "expo-camera";
-import {CameraCapturedPicture} from "expo-camera/src/Camera.types";
 import * as MediaLibrary from "expo-media-library";
 import {useCamera} from "./camera/useCamera";
-import {Button, Image, Text, TouchableOpacity, View} from "react-native";
+import {Button, Image, Text, TouchableOpacity, View, SafeAreaView} from "react-native";
 
 
 const Stack = createNativeStackNavigator();
 function App(){
-    const cameraRef = useRef<Camera | null>(null);
     const [hasCameraPermission, setHasCameraPermission] = useState(false);
     const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(false);
-    const [photo, setPhoto] = useState<CameraCapturedPicture>();
 
     useEffect(() => {
         (async () => {
@@ -26,19 +23,25 @@ function App(){
 
     const {
         cameraType,
+        cameraRef,
+        photo,
         toggleCameraType,
-        capturePhoto
+        capturePhoto,
+        sharePic,
+        savePhoto,
+        discardPhoto,
+        getUserPermission,
+        setPhoto
     } = useCamera();
 
     if (photo) {
-        const {sharePic, savePhoto, setPhoto,} = useCamera();
         return (
-            <View className="flex-1 justify-center">
+            <SafeAreaView className="flex-1 justify-center">
                 <Image className="self-stretch flex-1" source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
                 <Button title="Share" onPress={sharePic} />
                 {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
                 <Button title="Discard" onPress={() => setPhoto(undefined)} />
-            </View>
+            </SafeAreaView>
         );
     }
 
