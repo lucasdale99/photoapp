@@ -1,4 +1,3 @@
-import { SafeAreaView, Image, Button } from 'react-native';
 import { useContext } from 'react';
 import { CameraViewContext } from '../state/CameraContextProvider';
 import { CameraContainer } from './CameraContainer';

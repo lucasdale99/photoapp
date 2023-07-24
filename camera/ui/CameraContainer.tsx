@@ -1,27 +1,16 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import React, {Dispatch, SetStateAction} from "react";
+import React, {Dispatch, SetStateAction, useContext} from "react";
 import { Camera } from "expo-camera";
 import {CameraDomainObject} from "../domain/CameraDomainObject";
 import {Ionicons} from "@expo/vector-icons";
+import {CameraViewContext} from "../state/CameraContextProvider";
 
 interface ICameraContainerProps {
     cameraDO: CameraDomainObject | undefined;
     setCameraDO: Dispatch<SetStateAction<CameraDomainObject | undefined>>;
 }
 export const CameraContainer = ({cameraDO, setCameraDO}: ICameraContainerProps) => {
-    const handleToggleCameraType = () => {
-        if(cameraDO) {
-            const updatedCameraDO = cameraDO.toggleCameraType();
-            setCameraDO(updatedCameraDO);
-        }
-    };
-
-    const handleCapturePhoto = async () => {
-        if(cameraDO) {
-            const updatedCameraDO = await cameraDO.capturePhoto();
-            setCameraDO(updatedCameraDO);
-        }
-    };
+    const {handleToggleCameraType, handleCapturePhoto} = useContext(CameraViewContext);
     
     return (
         <View className="flex-1 justify-center">

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npx expo -c",
+    "test": "react-scripts test --watchAll=false",
     "android": "npx expo run:android",
     "ios": "npx expo run:ios",
     "web": "npx expo start --web"
@@ -16,6 +17,7 @@
     "expo-sharing": "^11.2.2",
     "expo-splash-screen": "~0.20.4",
     "expo-status-bar": "~1.6.0",
+    "moq.ts": "^10.0.6",
     "nativewind": "~2.0.11",
     "postcss-cli": "^10.1.0",
     "react": "~18.2.0",
@@ -29,6 +31,9 @@
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.22.6",
     "@tsconfig/react-native": "^3.0.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.5.3",
     "@types/react": "~18.2.15",
     "@types/react-native": "~0.72.2",

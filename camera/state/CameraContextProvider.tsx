@@ -7,11 +7,21 @@ import { Text, View } from "react-native";
 interface ICameraViewContext {
     cameraDO: CameraDomainObject | undefined
     setCameraDO: Dispatch<SetStateAction<CameraDomainObject | undefined>>
+    handleToggleCameraType: () => void,
+    handleCapturePhoto: () => void,
+    handleShare: () => void,
+    handleSave: () => void,
+    handleDiscard: () => void,
 }
 
 export const CameraViewContext = createContext<ICameraViewContext>({
     cameraDO: undefined,
     setCameraDO: () => {},
+    handleToggleCameraType: () => {},
+    handleCapturePhoto: () => {},
+    handleShare: () => {},
+    handleSave: () => {},
+    handleDiscard: () => {},
 })
 
 interface ICameraViewContextProviderProps {
@@ -30,6 +40,47 @@ export const CameraViewContextProvider = ({children}: ICameraViewContextProvider
         )
     );
 
+    const handleToggleCameraType = () => {
+        if(cameraDO) {
+            const updatedCameraDO = cameraDO.toggleCameraType();
+            setCameraDO(updatedCameraDO);
+        }
+    };
+
+    const handleCapturePhoto = async () => {
+        if(cameraDO) {
+            const updatedCameraDO = await cameraDO.capturePhoto();
+            setCameraDO(updatedCameraDO);
+        }
+    };
+
+    const handleShare = async () => {
+        if(cameraDO) {
+            const updatedCameraDO = await cameraDO.sharePicture();
+            setCameraDO(updatedCameraDO);
+        }
+    }
+
+    const handleSave = async () => {
+        if(cameraDO) {
+            const updatedCameraDO = await cameraDO.savePhoto();
+            setCameraDO(updatedCameraDO);
+        }
+    }
+
+    const handleDiscard = () => {
+        if (cameraDO) {
+            const updatedCameraDO = new CameraDomainObject(
+                cameraDO.hasCameraPermission,
+                cameraDO.hasMediaLibraryPermission,
+                cameraDO.cameraType,
+                null,
+                cameraDO.cameraRef,
+            );
+            setCameraDO(updatedCameraDO);
+        }
+    }
+
     useEffect(() => {
         (async () => {
             let updatedCameraDO = await cameraDO!.getCameraPermission();
@@ -44,7 +95,7 @@ export const CameraViewContextProvider = ({children}: ICameraViewContextProvider
     }
 
     return (
-        <CameraViewContext.Provider value={{cameraDO, setCameraDO}}>
+        <CameraViewContext.Provider value={{cameraDO, setCameraDO, handleToggleCameraType, handleCapturePhoto, handleSave, handleShare, handleDiscard}}>
             {children}
         </CameraViewContext.Provider>
     )

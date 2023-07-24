@@ -1,6 +1,7 @@
 ﻿import {Button, Image, SafeAreaView} from "react-native";
 import {CameraDomainObject} from "../domain/CameraDomainObject";
-import {Dispatch, SetStateAction} from "react";
+import {Dispatch, SetStateAction, useContext} from "react";
+import {CameraViewContext} from "../state/CameraContextProvider";
 
 interface ICapturedPhotoContainerProps {
     cameraDO: CameraDomainObject;
@@ -8,33 +9,8 @@ interface ICapturedPhotoContainerProps {
 }
 
 export const CapturedPhotoContainer = ({...props}: ICapturedPhotoContainerProps) => {
+    const {handleShare, handleSave, handleDiscard} = useContext(CameraViewContext)
     const {cameraDO, setCameraDO} = props;
-    const handleShare = async () => {
-        if(cameraDO) {
-            const updatedCameraDO = await cameraDO.sharePicture();
-            setCameraDO(updatedCameraDO);
-        }
-    }
-
-    const handleSave = async () => {
-        if(cameraDO) {
-            const updatedCameraDO = await cameraDO.savePhoto();
-            setCameraDO(updatedCameraDO);
-        }
-    }
-
-    const handleDiscard = () => {
-        if (cameraDO) {
-            const updatedCameraDO = new CameraDomainObject(
-                cameraDO.hasCameraPermission,
-                cameraDO.hasMediaLibraryPermission,
-                cameraDO.cameraType,
-                null,
-                cameraDO.cameraRef,
-            );
-            setCameraDO(updatedCameraDO);
-        }
-    }
     
     return (
         <SafeAreaView className="flex-1 justify-center">
