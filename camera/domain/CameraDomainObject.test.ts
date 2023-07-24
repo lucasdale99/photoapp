@@ -6,10 +6,10 @@ import {CameraDomainObjectTestFactory} from "../testFactories/CameraDomainObject
 jest.mock('expo-camera', () => ({
     Camera: {
         requestCameraPermissionsAsync: jest.fn(),
-        Type: {
-            back: 'back',
-            front: 'front'
-        }
+    },
+    CameraType: {
+        back: 'back',
+        front: 'front'
     }
 }));
 
