@@ -1,6 +1,7 @@
 import {Camera, CameraType} from 'expo-camera';
 import {CameraDomainObject} from './CameraDomainObject';
 import * as MediaLibrary from 'expo-media-library';
+import {CameraDomainObjectTestFactory} from "../testFactories/CameraDomainObjectTestFactory";
 
 jest.mock('expo-camera', () => ({
     Camera: {
@@ -24,7 +25,7 @@ describe('CameraDomainObject', () => {
     let cameraDomainObject: CameraDomainObject;
 
     beforeEach(() => {
-        cameraDomainObject = new CameraDomainObject(false, false, CameraType.back, null, {current: null});
+        cameraDomainObject = CameraDomainObjectTestFactory.create();
     });
 
     it('toggles camera type', () => {
