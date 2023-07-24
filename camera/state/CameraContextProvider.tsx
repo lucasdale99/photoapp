@@ -70,13 +70,7 @@ export const CameraViewContextProvider = ({children}: ICameraViewContextProvider
 
     const handleDiscard = () => {
         if (cameraDO) {
-            const updatedCameraDO = new CameraDomainObject(
-                cameraDO.hasCameraPermission,
-                cameraDO.hasMediaLibraryPermission,
-                cameraDO.cameraType,
-                null,
-                cameraDO.cameraRef,
-            );
+            const updatedCameraDO = cameraDO.discardPhoto();
             setCameraDO(updatedCameraDO);
         }
     }

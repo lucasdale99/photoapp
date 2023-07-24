@@ -54,10 +54,9 @@ export class CameraDomainObject {
     }
 
     public async sharePicture(): Promise<CameraDomainObject> {
-        if(!this.photo) return this.clone();
+        if(!this.photo) return this;
         await shareAsync(this.photo.uri);
-        this.photo = null;
-        return this.clone();
+        return this;
     }
 
     public async savePhoto(): Promise<CameraDomainObject> {
@@ -67,11 +66,8 @@ export class CameraDomainObject {
         return this.clone();
     }
     
-    public discardPhoto = (): void => {
+    public discardPhoto = (): CameraDomainObject => {
         this.photo = null;
-    }
-    
-    public newCopy(): CameraDomainObject {
         return this.clone();
     }
 
