@@ -1,8 +1,8 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { CameraViewContext } from "../state/CameraContextProvider";
-import {Dispatch, SetStateAction, useContext} from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import { Camera } from "expo-camera";
 import {CameraDomainObject} from "../domain/CameraDomainObject";
+import {Ionicons} from "@expo/vector-icons";
 
 interface ICameraContainerProps {
     cameraDO: CameraDomainObject | undefined;
@@ -32,14 +32,20 @@ export const CameraContainer = ({cameraDO, setCameraDO}: ICameraContainerProps) 
                     <Camera className="flex-1" type={cameraDO.cameraType} ref={(camera) => {
                         cameraDO.cameraRef.current = camera;
                     }}>
-                    <View className="flex-1 flex-row bg-transparent mt-20">
-                        <TouchableOpacity className="flex-1 flex-end items-center" onPress={handleToggleCameraType}>
-                            <Text className="text-2xl font-bold text-white">Flip Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity className="flex-1 flex-end items-center" onPress={handleCapturePhoto}>
-                            <Text className="text-2xl font-bold text-white">Take Picture</Text>
-                        </TouchableOpacity>
-                    </View>
+                        <View className="flex-1 justify-start">
+                            <View className="flex-row bg-transparent mt-10">
+                                <TouchableOpacity className="flex-1 justify-center items-end mr-5" onPress={handleToggleCameraType}>
+                                    <Ionicons name="md-camera" size={32} color="white" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View className="flex-1 justify-end">
+                            <View className="flex-row bg-transparent mb-20">
+                                <TouchableOpacity className="flex-1 justify-center items-center" onPress={handleCapturePhoto}>
+                                    <View className="rounded-full border-8 border-white w-20 h-20"></View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                 </Camera>
             )}
         </View>
