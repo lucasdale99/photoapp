@@ -20,6 +20,7 @@
     "expo-sharing": "^11.2.2",
     "expo-splash-screen": "~0.20.4",
     "expo-status-bar": "~1.6.0",
+    "lottie-react-native": "^6.0.1",
     "moq.ts": "^10.0.6",
     "nativewind": "~2.0.11",
     "postcss-cli": "^10.1.0",
